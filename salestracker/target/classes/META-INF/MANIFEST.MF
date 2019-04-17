@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: Tubocass
+Build-Jdk: 10.0.2
+Implementation-Title: SalesTracker
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.tubocass
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/salestracker
+Created-By: Maven Integration for Eclipse
+
