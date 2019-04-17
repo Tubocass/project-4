@@ -53,3 +53,4 @@ HELP.md
 hs_err_pid*
 
 salestracker/target/classes/application.properties
+salestracker/src/main/resources/application.properties
