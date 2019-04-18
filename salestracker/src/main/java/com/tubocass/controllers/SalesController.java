@@ -4,12 +4,14 @@ import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tubocass.services.SalesService;
 
 @RestController
+@RequestMapping("/sales")
 public class SalesController 
 {
 	/*
@@ -24,7 +26,8 @@ public class SalesController
 	@GetMapping(value = "/dailysales")
 	public String getSalesData(@RequestParam(name="date")LocalDate date)
 	{
-		return salesService.getSalesForDate(date);
+		//return salesService.getSalesForDate(date);
+		return "Date: " + date;
 	}
 	
 	@GetMapping(value = "/allsales")
