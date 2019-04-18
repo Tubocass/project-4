@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { SalesFigure } from '../model/SalesFigure';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,10 @@ export class SalesService {
   };
   constructor(private http:HttpClient) { }
 
- public getAllDailySales(): Observable<any>{
+  getAllDailySales(): Observable<SalesFigure[]>{
     return this.http.get<any>(this.salesURL+'/allsales')
-
+  }
+  addDailySales(daily:SalesFigure): Observable<SalesFigure>{
+    return this.http.post<any>(this.salesURL, daily, this.httpOptions);
   }
 }

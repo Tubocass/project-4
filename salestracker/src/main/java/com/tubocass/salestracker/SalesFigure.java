@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+
 @Entity
 @Table(name = "daily_sales")
 public class SalesFigure 
@@ -14,6 +17,7 @@ public class SalesFigure
 
 	//private int id;
 	@Id
+	@JsonDeserialize(using = LocalDateDeserializer.class)
 	private LocalDate date;
 	@Column(name = "total_sales")
 	private int salesTotal; //All sales total. This could just be a method...
