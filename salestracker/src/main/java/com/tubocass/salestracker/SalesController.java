@@ -4,9 +4,13 @@ import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.google.gson.Gson;
 
 
 @RequestMapping("/sales")
@@ -33,5 +37,13 @@ public class SalesController
 	public String getAllSalesData()
 	{
 		return salesService.getAllDailySalesRecords();
+	}
+	
+	@PostMapping(consumes = "application/json")
+	public void addDailySales(@RequestBody String daily)
+	{
+		Gson gson = new Gson();
+		SalesFigure sf = gson.fromJson(daily, SalesFigure.class);
+		salesService.addDailySales(sf);
 	}
 }

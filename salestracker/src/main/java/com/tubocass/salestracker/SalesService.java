@@ -26,4 +26,9 @@ public class SalesService
 		Gson gson = new Gson();
 		return gson.toJson(sf);
 	}
+	public void addDailySales(SalesFigure sf) 
+	{
+		repo.save(sf);
+//		return false; //add some transaction functionality
+	}
 }
