@@ -1,4 +1,4 @@
-package com.tubocass.controllers;
+package com.tubocass.salestracker;
 
 import java.time.LocalDate;
 
@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tubocass.services.SalesService;
 
-@RestController
 @RequestMapping("/sales")
+@RestController
 public class SalesController 
 {
 	/*
@@ -24,10 +23,10 @@ public class SalesController
 	@Autowired SalesService salesService;
 	
 	@GetMapping(value = "/dailysales")
-	public String getSalesData(@RequestParam(name="date")LocalDate date)
+	public String getSalesData(@RequestParam(name="date")String date)
 	{
-		//return salesService.getSalesForDate(date);
-		return "Date: " + date;
+		return salesService.getSalesForDate(LocalDate.parse(date));
+//		return "Date: " + date;
 	}
 	
 	@GetMapping(value = "/allsales")

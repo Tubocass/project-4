@@ -1,4 +1,4 @@
-package com.tubocass.entities;
+package com.tubocass.salestracker;
 
 import java.time.LocalDate;
 
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "DailySales")
+@Table(name = "daily_sales")
 public class SalesFigure 
 {
 

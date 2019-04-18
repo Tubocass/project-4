@@ -1,4 +1,4 @@
-package com.tubocass.services;
+package com.tubocass.salestracker;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
-import com.tubocass.entities.SalesFigure;
-import com.tubocass.repos.SalesRepo;
 
 @Service
 public class SalesService 
