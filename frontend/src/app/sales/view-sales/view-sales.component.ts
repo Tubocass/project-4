@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SalesService } from '../service/sales.service';
 
 @Component({
   selector: 'app-view-sales',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewSalesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private salesService:SalesService) { }
 
   ngOnInit() {
+    this.salesService.getAllDailySales()
+    .subscribe(dailies => {console.log(dailies)})
   }
 
 }
