@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SalesService } from '../service/sales.service';
 import { SalesFigure } from '../model/SalesFigure';
+import { SimpleDate } from '../model/Date';
 
 @Component({
   selector: 'app-enter-sales',
@@ -11,12 +12,20 @@ export class EnterSalesComponent implements OnInit {
 
   constructor(private salesService:SalesService) { }
 
+  addSales(date, online, inStore){
+    let sf = new SalesFigure(SimpleDate.parse(date), parseInt(online), parseInt(inStore));
+    // console.log(sf);
+   this.salesService.addDailySales(sf).subscribe(daily => console.log(daily))
+
+  }
+
   ngOnInit() {
-   // let date = `{${new Date('1988-08-10').toISOString().split('T')[0]}}`
-   let date = {year: 1988, month: 8, day: 10};
-    let sf = new SalesFigure(date, 400, 200);
-    console.log(sf)
-    this.salesService.addDailySales(sf).subscribe(daily => console.log(daily))
+    document.getElementById('datePicker').addEventListener('change', (e)=> console.log( ))
+  //  test
+  //  let date = {year: 1988, month: 8, day: 10};
+  //  let sf = new SalesFigure(date, 400, 200);
+  //  console.log(sf)
+  //  this.salesService.addDailySales(sf).subscribe(daily => console.log(daily))
   }
 
 }

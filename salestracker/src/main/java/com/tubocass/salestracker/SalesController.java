@@ -41,10 +41,10 @@ public class SalesController
 	}
 	
 	@PostMapping(consumes = "application/json")
-	public void addDailySales(@RequestBody String daily)
+	public SalesFigure addDailySales(@RequestBody String daily)
 	{
 		Gson gson = new Gson();
 		SalesFigure sf = gson.fromJson(daily, SalesFigure.class);
-		salesService.addDailySales(sf);
+		return salesService.addDailySales(sf);
 	}
 }

@@ -1,3 +1,14 @@
 <p>
   enter-sales works!
 </p>
+
+<label>Date: </label>
+<input id="datePicker" type="date" name="date" #picker>
+
+<label>Online Sales: </label>
+<input type="number" #online id="online">
+
+<label>In Store Sales: </label>
+<input type="number" #inStore id="inStore">
+<br>
+<button (click) = "addSales(picker.value, online.value, inStore.value)">Add</button>
