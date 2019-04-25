@@ -14,18 +14,20 @@ export class EnterSalesComponent implements OnInit {
 
   addSales(date, online, inStore){
     let sf = new SalesFigure(SimpleDate.parse(date), parseInt(online), parseInt(inStore));
-    // console.log(sf);
-   this.salesService.addDailySales(sf).subscribe(daily => console.log(daily))
+    this.salesService.addDailySales(sf).subscribe(daily => {
+    //  console.log(daily);
+    let figure = new SalesFigure(SimpleDate.parse(daily.date), daily['onlineTotal'], daily['inStoreTotal']);
 
+     this.salesService.sales.next(figure);
+    })
   }
 
   ngOnInit() {
-    document.getElementById('datePicker').addEventListener('change', (e)=> console.log( ))
+    // document.getElementById('datePicker').addEventListener('change', (e)=> console.log( ))
   //  test
   //  let date = {year: 1988, month: 8, day: 10};
   //  let sf = new SalesFigure(date, 400, 200);
   //  console.log(sf)
   //  this.salesService.addDailySales(sf).subscribe(daily => console.log(daily))
   }
-
 }

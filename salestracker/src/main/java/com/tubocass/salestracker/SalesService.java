@@ -28,6 +28,6 @@ public class SalesService
 	}
 	public SalesFigure addDailySales(SalesFigure sf) 
 	{
-		return repo.save(sf); //add some transaction functionality
+		return repo.saveAndFlush(sf); //add some transaction functionality
 	}
 }

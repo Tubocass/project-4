@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { SalesFigure } from '../model/SalesFigure';
 
 @Injectable({
@@ -8,6 +8,7 @@ import { SalesFigure } from '../model/SalesFigure';
 })
 export class SalesService {
 
+  public sales = new Subject<SalesFigure>();
   private salesURL = 'http://localhost:8080/sales';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,9 +16,9 @@ export class SalesService {
   constructor(private http:HttpClient) { }
 
   getAllDailySales(): Observable<SalesFigure[]>{
-    return this.http.get<any>(this.salesURL+'/allsales')
+    return this.http.get<SalesFigure[]>(this.salesURL+'/allsales')
   }
-  addDailySales(daily:SalesFigure): Observable<SalesFigure>{
-    return this.http.post<any>(this.salesURL, daily, this.httpOptions);
+  addDailySales(daily:SalesFigure): Observable<any>{
+    return this.http.post<SalesFigure>(this.salesURL, daily, this.httpOptions);
   }
 }

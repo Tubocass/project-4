@@ -18,8 +18,13 @@ export class SalesFigure{
     inStoreTotal:number;
     salesTotal:number;
 
-    constructor(date:SimpleDate, online:number, store:number){
-        this.date = date;
+    constructor(date:any, online:number, store:number){
+        if('string' === typeof date)
+        {
+            this.date = SimpleDate.parse(date)
+        }else{
+            this.date = date;
+        }
         this.onlineTotal = online;
         this.inStoreTotal = store;
         this.salesTotal = this.onlineTotal + this.inStoreTotal;
