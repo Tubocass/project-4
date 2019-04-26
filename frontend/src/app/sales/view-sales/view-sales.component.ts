@@ -25,5 +25,4 @@ export class ViewSalesComponent implements OnInit {
       this.dailySales = dailies;
     })
   }
-
 }

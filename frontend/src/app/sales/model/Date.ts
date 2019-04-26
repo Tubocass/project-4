@@ -8,12 +8,11 @@ export class SimpleDate{
         this.month = m;
         this.day = d;
     }
-
     static parse(dateString:String): SimpleDate{
         let dateArr = dateString.split('-');
         return new SimpleDate(parseInt(dateArr[0]), parseInt(dateArr[1]), parseInt(dateArr[2]))
     }
-    printDate() : String{
-        return `${this.year} - ${this.month} - ${this.day}`
-    }
+    // printDate() : String{
+    //     return `${this.year} - ${this.month} - ${this.day}`
+    // }
 }

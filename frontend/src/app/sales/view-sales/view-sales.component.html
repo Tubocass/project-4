@@ -1,6 +1,3 @@
-<p>
-  view-sales works!
-</p>
 <ol>
-  <li *ngFor = "let sales of dailySales"> {{sales.date.year}}-{{sales.date.month}}-{{sales.date.day}} - {{sales.salesTotal}}</li>
+  <li *ngFor = "let sales of dailySales"> <span>{{sales.date | simpleDatePipe}} - {{sales.salesTotal}}</span></li>
 </ol>
