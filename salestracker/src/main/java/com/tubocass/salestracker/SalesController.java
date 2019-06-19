@@ -27,11 +27,25 @@ public class SalesController
 	
 	@Autowired SalesService salesService;
 	
+	@GetMapping(value = "/latestdate")
+	public String getLatestDate()
+	{
+		LocalDate today = LocalDate.now();
+		Gson gson = new Gson();
+		return gson.toJson(today);
+	}
+	
 	@GetMapping(value = "/dailysales")
 	public String getSalesData(@RequestParam(name="date")String date)
 	{
 		return salesService.getSalesForDate(LocalDate.parse(date));
 //		return "Date: " + date;
+	}
+
+	@GetMapping(value = "/salesbetween")
+	public String getSalesBetween(@RequestParam(name="begin")String beginDate, @RequestParam(name="end")String endDate)
+	{
+		return salesService.getSalesBetween(LocalDate.parse(beginDate), LocalDate.parse(endDate));
 	}
 	
 	@GetMapping(value = "/allsales")
@@ -47,4 +61,5 @@ public class SalesController
 		SalesFigure sf = gson.fromJson(daily, SalesFigure.class);
 		return salesService.addDailySales(sf);
 	}
+
 }
