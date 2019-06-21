@@ -2,7 +2,9 @@ package com.tubocass.salestracker;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.IntSummaryStatistics;
 import java.util.OptionalInt;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import com.google.gson.Gson;
@@ -71,6 +73,21 @@ public class SalesController
 		return gson.toJson(max.getAsInt());
 	}
 	
+	@GetMapping(value = "/salesstats")
+	public String getAvgSalesData(@RequestParam(name="day")DayOfWeek dayOfWeek)
+	{
+		IntSummaryStatistics stats = salesService.getAllDailySalesRecords()
+			.parallelStream()
+			.filter(day -> day.getDate().getDayOfWeek() == dayOfWeek)
+			.collect(Collectors.summarizingInt(SalesFigure::getSalesTotal));
+			// ^^ does the same thing in 1 less step
+			// .flatMapToInt(day -> IntStream.of(day.getSalesTotal()))
+			// .summaryStatistics();
+		
+		// System.out.println(stats);
+		//average is a computed value, so it won't show up in JSON
+		return gson.toJson(stats);
+	}
 	
 	@PostMapping(consumes = "application/json")
 	public SalesFigure addDailySales(@RequestBody String daily)
