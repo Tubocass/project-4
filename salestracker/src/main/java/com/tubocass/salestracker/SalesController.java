@@ -1,6 +1,11 @@
 package com.tubocass.salestracker;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
+
+import com.google.gson.Gson;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.google.gson.Gson;
 
 @CrossOrigin
 @RequestMapping("/sales")
@@ -25,34 +28,49 @@ public class SalesController
 	 * update the figures for a day if necessary
 	 */
 	
+	Gson gson = new Gson();
 	@Autowired SalesService salesService;
 	
 	@GetMapping(value = "/latestdate")
 	public String getLatestDate()
 	{
 		LocalDate today = LocalDate.now();
-		Gson gson = new Gson();
-		return gson.toJson(today);
+		today.getDayOfWeek();
+		// LocalDate lastTues = LocalDate.of(2019, 6, 18);
+		return gson.toJson(today.getDayOfWeek());
 	}
 	
 	@GetMapping(value = "/dailysales")
 	public String getSalesData(@RequestParam(name="date")String date)
 	{
-		return salesService.getSalesForDate(LocalDate.parse(date));
+		return gson.toJson(salesService.getSalesForDate(LocalDate.parse(date)));
 //		return "Date: " + date;
 	}
 
 	@GetMapping(value = "/salesbetween")
 	public String getSalesBetween(@RequestParam(name="begin")String beginDate, @RequestParam(name="end")String endDate)
 	{
-		return salesService.getSalesBetween(LocalDate.parse(beginDate), LocalDate.parse(endDate));
+		return gson.toJson(salesService.getSalesBetween(LocalDate.parse(beginDate), LocalDate.parse(endDate)));
 	}
 	
 	@GetMapping(value = "/allsales")
 	public String getAllSalesData()
 	{
-		return salesService.getAllDailySalesRecords();
+		return gson.toJson(salesService.getAllDailySalesRecords());
 	}
+
+	@GetMapping(value = "/maxsales")
+	public String getMaxSalesData(@RequestParam(name="day")DayOfWeek dayOfWeek)
+	{
+		OptionalInt max = salesService.getAllDailySalesRecords()
+			.stream()
+			.filter(day -> day.getDate().getDayOfWeek() == dayOfWeek)
+			.flatMapToInt(day -> IntStream.of(day.getSalesTotal()))
+			.max();
+			
+		return gson.toJson(max.getAsInt());
+	}
+	
 	
 	@PostMapping(consumes = "application/json")
 	public SalesFigure addDailySales(@RequestBody String daily)

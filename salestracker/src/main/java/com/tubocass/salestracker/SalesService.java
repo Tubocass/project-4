@@ -12,24 +12,23 @@ import com.google.gson.Gson;
 public class SalesService 
 {
 	@Autowired SalesRepo repo;
-	Gson gson = new Gson();
-	public String getSalesForDate(LocalDate date)
+	public SalesFigure getSalesForDate(LocalDate date)
 	{
 		//validate date param
 		SalesFigure sf = repo.findByDate(date);
-		return gson.toJson(sf);
+		return sf;
 	}
 
-	public String getSalesBetween(LocalDate begin, LocalDate end)
+	public List<SalesFigure> getSalesBetween(LocalDate begin, LocalDate end)
 	{
 		List<SalesFigure> sf = repo.findByDateBetween(begin, end);
-		return gson.toJson(sf);
+		return sf;
 	}
 
-	public String getAllDailySalesRecords()
+	public List<SalesFigure> getAllDailySalesRecords()
 	{
 		List<SalesFigure> sf = repo.findAll();
-		return gson.toJson(sf);
+		return sf;
 	}
 	
 	public SalesFigure addDailySales(SalesFigure sf) 
