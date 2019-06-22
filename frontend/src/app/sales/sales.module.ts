@@ -6,13 +6,15 @@ import { ViewSalesComponent } from './view-sales/view-sales.component';
 import { EnterSalesComponent } from './enter-sales/enter-sales.component';
 import { SalesComponent } from './sales/sales.component';
 import { SimpleDatePipe } from '../pipes/simpleDatePipe';
+import { avgPipe } from '../pipes/avgPipe';
 
 @NgModule({
   declarations: [
     ViewSalesComponent, 
     EnterSalesComponent, 
     SalesComponent,
-    SimpleDatePipe
+    SimpleDatePipe,
+    avgPipe
   ],
   imports: [
     CommonModule,
