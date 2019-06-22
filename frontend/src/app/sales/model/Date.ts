@@ -12,7 +12,9 @@ export class SimpleDate{
         let dateArr = dateString.split('-');
         return new SimpleDate(parseInt(dateArr[0]), parseInt(dateArr[1]), parseInt(dateArr[2]))
     }
-    // printDate() : String{
-    //     return `${this.year} - ${this.month} - ${this.day}`
-    // }
+    printDate() : String{
+        let formatted = `${this.year}-${this.month>9? this.month: '0'+this.month.toString()}-${this.day>9? this.day: '0'+this.day.toString()}`;
+        // console.log(formatted)
+        return formatted;
+    }
 }
