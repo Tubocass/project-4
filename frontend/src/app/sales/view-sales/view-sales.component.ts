@@ -16,9 +16,9 @@ export class ViewSalesComponent implements OnInit {
   constructor(private salesService:SalesService) { }
 
   ngOnInit() {
-    // this.getAllSales();
+    this.getAllSales();
     // this.getStats();
-    this.getSalesBetween(new SimpleDate(1988,8,8),new SimpleDate(1988,8,16));
+    // this.getSalesBetween(new SimpleDate(1988,8,6),new SimpleDate(1988,8,16));
     this.salesService.sales.subscribe(sale => {
       console.log(sale);
       this.dailySales.push(sale)

@@ -9,11 +9,13 @@ export class SimpleDate{
         this.day = d;
     }
     static parse(dateString:String): SimpleDate{
-        let dateArr = dateString.split('-');
-        return new SimpleDate(parseInt(dateArr[0]), parseInt(dateArr[1]), parseInt(dateArr[2]))
+        let dateArr = dateString.split('-').map(Number);
+        return new SimpleDate(dateArr[0], dateArr[1], dateArr[2]);
     }
     printDate() : String{
-        let formatted = `${this.year}-${this.month>9? this.month: '0'+this.month.toString()}-${this.day>9? this.day: '0'+this.day.toString()}`;
+        let formatted = `${this.year}-`+
+            `${this.month>9? this.month: '0'+this.month}-`+
+            `${this.day>9? this.day: '0'+this.day}`;
         // console.log(formatted)
         return formatted;
     }

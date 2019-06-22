@@ -27,7 +27,7 @@ public class SalesService
 
 	public List<SalesFigure> getAllDailySalesRecords()
 	{
-		List<SalesFigure> sf = repo.findAll();
+		List<SalesFigure> sf = repo.findAllOrderByDate();
 		return sf;
 	}
 	
