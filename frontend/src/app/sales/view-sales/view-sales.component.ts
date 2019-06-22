@@ -24,13 +24,13 @@ export class ViewSalesComponent implements OnInit {
   }
   getSales(): void{
     this.salesService.getAllDailySales()
-    .subscribe(dailies => {
+      .subscribe(dailies => {
       this.dailySales = dailies;
     })
   }
   getStats(): void{
     this.salesService.getSalesStats('WEDNESDAY')
-    .subscribe(stats => {
+      .subscribe(stats => {
       this.dailyStats = stats;
     })
   }

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SalesRoutingModule } from './sales-routing.module';
 import { ViewSalesComponent } from './view-sales/view-sales.component';
 import { EnterSalesComponent } from './enter-sales/enter-sales.component';
-import { SalesComponent } from './sales/sales.component';
+import { SalesComponent } from './sales-parent/sales-parent.component';
 import { SimpleDatePipe } from '../pipes/simpleDatePipe';
 import { avgPipe } from '../pipes/avgPipe';
 
