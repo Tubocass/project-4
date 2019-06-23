@@ -3,6 +3,7 @@ import { SalesService } from '../service/sales.service';
 import { SalesFigure } from '../model/SalesFigure';
 import { Stats } from '../model/Stats';
 import { SimpleDate } from '../model/Date';
+import * as Highcharts from 'highcharts';
 
 @Component({
   selector: 'app-view-sales',
@@ -23,11 +24,40 @@ export class ViewSalesComponent implements OnInit {
       console.log(sale);
       this.dailySales.push(sale)
     })
+    Highcharts.chart('chart', this.options)
   }
+
+  options: any = {
+    chart: {
+        type: 'bar'
+    },
+    title: {
+        text: 'August'
+    },
+    xAxis: {
+        categories: []
+    },
+    yAxis: {
+        title: {
+            text: 'days'
+        }
+    },
+    series: [{
+        name: 'Jane',
+        data: []
+    }, {
+        name: 'John',
+        data: []
+    }]
+  };
+
   getAllSales(): void{
     this.salesService.getAllDailySales()
       .subscribe(dailies => {
         this.dailySales = dailies;
+        this.options.series[0]['data'] = this.dailySales.map(daily => daily.salesTotal);
+        this.options.xAxis['categories'] = this.dailySales.map(daily => daily.date.day)
+        Highcharts.chart('chart', this.options)
     })
   }
   getSalesBetween(begin:SimpleDate, end:SimpleDate): void{
