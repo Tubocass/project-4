@@ -15,11 +15,15 @@
   <th>online</th>
   <th>in-store</th>
   <tr *ngFor = "let sales of dailySales">
-    <td style="column-gap: 120px"><span>{{sales.date | simpleDatePipe}}</span></td>
-    <td>{{sales.salesTotal}}</td>
-    <td>{{sales.onlineTotal}}</td>
-    <td>{{sales.inStoreTotal}}</td>
+    <td style="padding-right: 15px"><span>{{sales.date | simpleDatePipe}}</span></td>
+    <td style="padding-right: 10px; text-align: right;">{{sales.salesTotal}}</td>
+    <td style="padding-right: 10px; text-align: right;">{{sales.onlineTotal}}</td>
+    <td style="padding-right: 10px; text-align: right;">{{sales.inStoreTotal}}</td>
   </tr>
 </table>
 
-<div id="chart" style="width: 50%; height: 800px;"></div>
+<div>
+  <div id="chart" style="width: 45%; height: 400px;"></div>
+  <!-- <div id="chart2" style="width: 45%; height: 400px;"></div> -->
+</div>
+
