@@ -46,7 +46,6 @@ public class SalesController
 	public String getSalesData(@RequestParam(name="date")String date)
 	{
 		return gson.toJson(salesService.getSalesForDate(LocalDate.parse(date)));
-//		return "Date: " + date;
 	}
 
 	@GetMapping(value = "/salesbetween")
@@ -61,20 +60,20 @@ public class SalesController
 		return gson.toJson(salesService.getAllDailySalesRecords());
 	}
 
-	@GetMapping(value = "/maxsales")
-	public String getMaxSalesData(@RequestParam(name="day")DayOfWeek dayOfWeek)
-	{
-		OptionalInt max = salesService.getAllDailySalesRecords()
-			.stream()
-			.filter(day -> day.getDate().getDayOfWeek() == dayOfWeek)
-			.flatMapToInt(day -> IntStream.of(day.getSalesTotal()))
-			.max();
+	// @GetMapping(value = "/maxsales")
+	// public String getMaxSalesData(@RequestParam(name="day")DayOfWeek dayOfWeek)
+	// {
+	// 	OptionalInt max = salesService.getAllDailySalesRecords()
+	// 		.stream()
+	// 		.filter(day -> day.getDate().getDayOfWeek() == dayOfWeek)
+	// 		.flatMapToInt(day -> IntStream.of(day.getSalesTotal()))
+	// 		.max();
 			
-		return gson.toJson(max.getAsInt());
-	}
+	// 	return gson.toJson(max.getAsInt());
+	// }
 	
 	@GetMapping(value = "/salesstats")
-	public String getAvgSalesData(@RequestParam(name="day")DayOfWeek dayOfWeek)
+	public String getSalesStats(@RequestParam(name="day")DayOfWeek dayOfWeek)
 	{
 		IntSummaryStatistics stats = salesService.getAllDailySalesRecords()
 			.parallelStream()

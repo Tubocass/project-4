@@ -1,10 +1,23 @@
-<ol >
+
+<!-- <ol > -->
   <!-- <li> <span>{{dailyStats.count}}</span></li>
   <li> <span>{{dailyStats.sum}}</span></li>
   <li> <span>{{dailyStats.min}}</span></li>
   <li> <span>{{dailyStats.max}}</span></li>
   <li> <span>{{dailyStats.sum |avg: dailyStats.count}}</span></li> -->
 
- 
-  <li *ngFor = "let sales of dailySales"> <span>{{sales.date | simpleDatePipe}} - {{sales.salesTotal}}</span></li>
-</ol>
+<!--  
+  <li *ngFor = "let sales of dailySales"> <span>{{sales.date | simpleDatePipe}} - {{sales.salesTotal}} - {{sales.onlineTotal}} - {{sales.inStoreTotal}}</span></li>
+</ol> -->
+<table>
+  <th>date</th>
+  <th>total</th>
+  <th>online</th>
+  <th>in-store</th>
+  <tr *ngFor = "let sales of dailySales">
+    <td><span>{{sales.date | simpleDatePipe}}</span></td>
+    <td>{{sales.salesTotal}}</td>
+    <td>{{sales.onlineTotal}}</td>
+    <td>{{sales.inStoreTotal}}</td>
+  </tr>
+</table>
