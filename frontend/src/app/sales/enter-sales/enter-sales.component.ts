@@ -10,16 +10,17 @@ import { SimpleDate } from '../model/Date';
 })
 export class EnterSalesComponent implements OnInit {
 
-  constructor(private salesService:SalesService) { }
+  constructor(private salesService: SalesService) { }
 
-  addSales(date, online, inStore){
+  addSales(date, online, inStore) {
     // console.log(date)
-    let sf = new SalesFigure(SimpleDate.parse(date), parseInt(online), parseInt(inStore));
+    // tslint:disable-next-line: radix
+    const sf = new SalesFigure(SimpleDate.parse(date), parseInt(online), parseInt(inStore));
     this.salesService.addDailySales(sf).subscribe(daily => {
-     console.log(daily);
-      let figure = new SalesFigure(SimpleDate.parse(daily.date), daily['onlineTotal'], daily['inStoreTotal']);
+      console.log(daily);
+      const figure = new SalesFigure(SimpleDate.parse(daily.date), daily.onlineTotal, daily.inStoreTotal);
       this.salesService.sales.next(figure);
-    })
+    });
   }
 
   ngOnInit() {

@@ -15,18 +15,18 @@ export class SalesService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getAllDailySales(): Observable<SalesFigure[]>{
-    return this.http.get<SalesFigure[]>(this.salesURL+'/allsales')
+  getAllDailySales(): Observable<SalesFigure[]> {
+    return this.http.get<SalesFigure[]>(this.salesURL + '/allsales');
   }
-  getSalesBetween(begin:SimpleDate, end:SimpleDate): Observable<SalesFigure[]>{
-    return this.http.get<SalesFigure[]>(this.salesURL+`/salesbetween?begin=${begin.printDate()}&end=${end.printDate()}`)
+  getSalesBetween(begin: SimpleDate, end: SimpleDate): Observable<SalesFigure[]> {
+    return this.http.get<SalesFigure[]>(this.salesURL + `/salesbetween?begin=${begin.printDate()}&end=${end.printDate()}`);
   }
-  getSalesStats(day: string) : Observable<Stats>{
-    return this.http.get<Stats>(this.salesURL+`/salesstats?day=${day}`)
+  getSalesStats(day: string): Observable<Stats> {
+    return this.http.get<Stats>(this.salesURL + `/salesstats?day=${day}`);
   }
-  addDailySales(daily:SalesFigure): Observable<any>{
+  addDailySales(daily: SalesFigure): Observable<any> {
     return this.http.post<SalesFigure>(this.salesURL, daily, this.httpOptions);
   }
 }

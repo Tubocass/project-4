@@ -12,17 +12,16 @@ import { SimpleDate } from './Date';
 	//pickup and delivery totals. these could come from online or in-store
 */
 
-export class SalesFigure{
-    date:SimpleDate;
-    onlineTotal:number;
-    inStoreTotal:number;
-    salesTotal:number;
+export class SalesFigure {
+    date: SimpleDate;
+    onlineTotal: number;
+    inStoreTotal: number;
+    salesTotal: number;
 
-    constructor(date:any, online:number, store:number){
-        if('string' === typeof date)
-        {
-            this.date = SimpleDate.parse(date)
-        }else{
+    constructor(date: any, online: number, store: number) {
+        if ('string' === typeof date) {
+            this.date = SimpleDate.parse(date);
+        } else {
             this.date = date;
         }
         this.onlineTotal = online;

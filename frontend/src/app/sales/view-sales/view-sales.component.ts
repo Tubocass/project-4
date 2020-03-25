@@ -14,25 +14,25 @@ export class ViewSalesComponent implements OnInit {
   dailySales: SalesFigure[];
   dailyStats: Stats;
 
-  constructor(private salesService:SalesService) { }
+  constructor(private salesService: SalesService) { }
 
   ngOnInit() {
     // this.getAllSales();
     // this.getStats();
-    this.getSalesBetween(new SimpleDate(1988,8,6),new SimpleDate(1988,8,16));
+    this.getSalesBetween(new SimpleDate(1988, 8, 6), new SimpleDate(1988, 8, 16));
     this.salesService.sales.subscribe(sale => {
       console.log(sale);
-      this.dailySales.push(sale)
-    })
+      this.dailySales.push(sale);
+    });
     // Highcharts.chart('chart', this.options)
     // Highcharts.chart('chart2', this.options)
 
   }
 
-  produceChart(title:string, sales:SalesFigure[]):object{
-    let data = sales.map(daily => daily.salesTotal);
-    let time = sales.map(daily => daily.date.day)
-    let options ={
+  produceChart(title: string, sales: SalesFigure[]): object {
+    const data = sales.map(daily => daily.salesTotal);
+    const time = sales.map(daily => daily.date.day);
+    const options = {
       chart: {
         type: 'line'
     },
@@ -49,35 +49,35 @@ export class ViewSalesComponent implements OnInit {
       },
       series: [{
           name: 'Pizza',
-          data: data
+          data
       }]
     };
     // Highcharts.chart('chart', options)
-    return options
+    return options;
   }
 
-  getAllSales(): void{
+  getAllSales(): void {
     this.salesService.getAllDailySales()
       .subscribe(dailies => {
         this.dailySales = dailies;
-       
-        Highcharts.chart('chart', this.produceChart('August', dailies))
+
+        Highcharts.chart('chart', this.produceChart('August', dailies));
         // Highcharts.chart('chart2', this.options)
 
-    })
+    });
   }
-  getSalesBetween(begin:SimpleDate, end:SimpleDate): void{
+  getSalesBetween(begin: SimpleDate, end: SimpleDate): void {
     this.salesService.getSalesBetween(begin, end)
       .subscribe(dailies => {
         this.dailySales = dailies;
-        Highcharts.chart('chart', this.produceChart('August', dailies))
+        Highcharts.chart('chart', this.produceChart('August', dailies));
 
-      })
+      });
   }
-  getStats(): void{
+  getStats(): void {
     this.salesService.getSalesStats('WEDNESDAY')
       .subscribe(stats => {
         this.dailyStats = stats;
-    })
+    });
   }
 }

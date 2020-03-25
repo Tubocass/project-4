@@ -10,8 +10,8 @@ import { avgPipe } from '../pipes/avgPipe';
 
 @NgModule({
   declarations: [
-    ViewSalesComponent, 
-    EnterSalesComponent, 
+    ViewSalesComponent,
+    EnterSalesComponent,
     SalesComponent,
     SimpleDatePipe,
     avgPipe
